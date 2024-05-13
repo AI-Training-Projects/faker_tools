@@ -1,0 +1,64 @@
+Explain CustomProvider for use in an article
+
+Build CustomProvider into CRMUser table generator
+
+★ IntelliCode API Usage Examples
+Thoughts?  Take our Survey!
+Derived from 41 examples found on GitHub
+Real World Examples of faker.Faker.name()
+Grouped by signature:
+
+name()
+
+Page 3 of 9
+
+ 
+def obj(data=None, object_id=True):
+        # type: (Optional[dict], Optional[bool, str, int]) -> dict
+
+        fake = Faker()
+
+        data = {} if data is None else data
+
+        data["name"] = fake.name()
+
+        if isinstance(object_id, bool):
+            if object_id:
+                data["objectID"] = fake.md5()
+        elif isinstance(object_id, (str, int)):
+            data["objectID"] = object_id
+
+        return data
+ algolia/algoliasearch-client-python/factory.py
+ 
+def create_fake_users(n):
+    """Generate fake users."""
+    faker = Faker()
+    for i in range(n):
+        user = User(name=faker.name(),
+                    age=random.randint(20, 80),
+                    address=faker.address().replace('\n', ', '),
+                    phone=faker.phone_number(),
+                    email=faker.email())
+        db.session.add(user)
+    db.session.commit()
+    print(f'Added {n} fake users to the database.')
+ miguelgrinberg/flask-tables/create_fake_users.py
+ 
+def test_create_user(client):
+    new_user = {
+        'username': fake.name(),
+        'password': fake.password(length=15, special_chars=True),
+    }
+    response = client.post('/admin/users/', data=new_user)
+    result = response.json
+
+    assert http.client.CREATED == response.status_code
+
+    expected = {
+        'id': ANY,
+        'username': new_user['username'],
+        'creation': '2019-05-07T13:47:34',
+    }
+    assert result == expected
+ PacktPublishing/Hands-On-Docker-for-Microservices-...
